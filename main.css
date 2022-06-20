@@ -1,0 +1,63 @@
+body {
+    
+    font-family: 'Source Sans Pro', sans-serif;
+    background-image: url(assets/roundbluemarble.png);
+    background-position: 55em 300px;
+    background-repeat: no-repeat;
+}
+div {
+    margin:0 3em;
+    max-width: 50em;
+    padding-bottom: 1em;
+}
+h1, h2 {
+    font-family: 'Lora';
+    
+}
+h1 {
+    margin-block-start: 0em;
+    font-size: 2em;
+}
+h2 {
+    margin-block-start: 1.5em;
+    font-size: 1.5em;
+}
+p {
+    font-size: 1.25em;
+}
+
+#profiles {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.schedule {
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+}
+
+.schedule th {
+    font-size: 1.25em;
+}
+
+td {
+    font-size: 1.2em;
+    padding: 0.3em 1em
+}
+
+img {
+    max-width: 50em;
+}
+
+iframe {
+    max-width: 35em;
+}
+
+.profile {
+    border: 3px solid green;
+    border-radius: 50%;
+    max-width: 150px;
+}
+
+
+
