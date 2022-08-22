@@ -31,7 +31,7 @@ p {
     text-align: center;
 }
 
-.schedule {
+.schedule, .schedule th, .schedule td{
     border: 1px solid lightgray;
     border-collapse: collapse;
 }
