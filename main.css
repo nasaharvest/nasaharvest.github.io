@@ -1,18 +1,23 @@
 body {
-    
     font-family: 'Source Sans Pro', sans-serif;
-    background-image: url(assets/roundbluemarble.png);
-    background-position: 55em 300px;
-    background-repeat: no-repeat;
+    margin: 0
 }
-div {
-    margin:0 3em;
-    max-width: 50em;
-    padding-bottom: 1em;
+
+.header {
+    display: flex; 
+    align-items:center; 
+    padding: 1rem; 
+    background-color: ghostwhite;
 }
+
+.logotext {
+    margin: 0 1rem; 
+    font-family: Helvetica, sans-serif; 
+    color: #03264F
+}
+
 h1, h2 {
-    font-family: 'Lora';
-    
+    font-family: 'Lora'; 
 }
 h1 {
     margin-block-start: 0em;
