@@ -61,7 +61,11 @@ iframe {
 .profile {
     border: 3px solid green;
     border-radius: 50%;
-    max-width: 150px;
+    max-width: 120px;
+}
+
+.emptyprofile {
+    max-width: 120px;
 }
 
 
