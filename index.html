@@ -12,38 +12,37 @@
   </head>
   
   <body>
-    <ul id="navbar">
-      <li id="logo">
+    <div id="navbar">
+      <div id="logo">
           <img src="assets/logo.png"/>
           <div id="logotext">
-              <span id="span1">NASA Harvest</span><br>Machine Learning
+            <h1>NASA Harvest</h1>
+            <h3>Machine Learning</h3>
           </div>
-      </li>
-      <li class="menu"><a href="#">About</a></li>
-      <li class="menu"><a href="#sessions">Sessions</a></li>
-      <li class="menu"><a href="#profiles">Team</a></li>
-    </ul>
+      </div>
+      <div class="menu">
+        <a href="#about">About</a>
+        <a href="#sessions">Sessions</a>
+        <a href="#profiles">Team</a>
+      </div>
+    </div>
     
 
     <!-- Main -->
     <div id="content60">
-      <div style="display: flex; align-items:center;">
-        <div>  
-          <div id="logotext2">
-            <span id="span1">NASA Harvest</span><br>Machine Learning
-          </div>
-          <p>
-            <a href="https://nasaharvest.org/">NASA Harvest</a> is NASA's agriculture and food security program.
-            Its machine learning team aims to:
-          </p>
-          <ul>
-            <li><p>Conduct fundamental machine learning research motivated by applications of remote sensing data</p></li>
-            <li><p>Enable and advance the adoption of ML methods using remote sensing data to benefit food security and agriculture</p></li>
-          </ul>
-        </div>
-        <img src="assets/harvest-diagram.png" width="60%"/>
+      <img id="about" src="assets/harvest-diagram.png"/>
+      <div>  
+        <p>
+          <a href="https://nasaharvest.org/">NASA Harvest</a> is NASA's agriculture and food security program.
+          Its machine learning team aims to:
+        </p>
+        <ul>
+          <li><p>Conduct fundamental machine learning research motivated by applications of remote sensing data</p></li>
+          <li><p>Enable and advance the adoption of ML methods using remote sensing data to benefit food security and agriculture</p></li>
+        </ul>
       </div>
-
+      <br>
+      <hr/>
       <br>
       <h1 id="sessions">Sessions</h1>
       <h2>Upcoming Sessions</h2>
@@ -51,18 +50,20 @@
         <li>
           <p>
             <a href="https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/">Machine Learning for Remote Sensing</a> 
-            | ICLR 2023 Workshop: May 5, 2023
+            | ICLR 2023 Workshop | May 5, 2023
           </p>
-          <img src="assets/iclr2023-workshop-ad-v2.png"/>
+          <img src="assets/iclr2023-workshop-ad-v2.png" width="100%"/>
         </li>
       </ul>
       <br>
       <h2>Past Sessions</h2>
       <ul>
-        <li><p><a href="https://nasaharvest.github.io/rcmrd2022.html">Scalable Cropland Mapping</a> | In-house Workshop: August 22-25, 2022</p></li>
-        <li><p><a href="https://nasaharvest.github.io/cvpr2022.html">Machine Learning for Remote Sensing: Agriculture and Food Security</a> | CVPR 2022 Tutorial: June 20, 2022</p></li>
+        <li><p><a href="https://nasaharvest.github.io/rcmrd2022.html">Scalable Cropland Mapping</a> | In-house Workshop | August 22-25, 2022</p></li>
+        <li><p><a href="https://nasaharvest.github.io/cvpr2022.html">Machine Learning for Remote Sensing: Agriculture and Food Security</a> | CVPR 2022 Tutorial | June 20, 2022</p></li>
       </ul>
       
+      <br>
+      <hr/>
       <br>
       <table id="profiles">
           <tr>
