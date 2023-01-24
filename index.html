@@ -2,11 +2,9 @@
 <html lang="en">
   <head>
     <title>NASA Harvest ML</title>
-    <base target="_blank">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
     <link rel="icon" href="data:image/svg+xml,
         <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
             <text y=%22.9em%22 font-size=%2290%22>🌎</text></svg>">
@@ -14,26 +12,25 @@
   </head>
   
   <body>
-    <!-- Header -->
-    <a href="https://nasaharvest.github.io/" style="color:inherit; text-decoration: none;">
-    <div class="header">
-        <img src="assets/logo.png" width="100rem"/>
-        <div class="logotext">
-            <span style="font-size:1.5rem;"><strong>NASA Harvest</strong></span>
-            <br>
-            <span style="font-size:1rem">Machine Learning</span>
-        </div>
-    </div>
-    </a>
+    <ul id="navbar">
+      <li id="logo">
+          <img src="assets/logo.png"/>
+          <div id="logotext">
+              <span id="span1">NASA Harvest</span><br>Machine Learning
+          </div>
+      </li>
+      <li class="menu"><a href="#">About</a></li>
+      <li class="menu"><a href="#sessions">Sessions</a></li>
+      <li class="menu"><a href="#profiles">Team</a></li>
+    </ul>
+    
 
     <!-- Main -->
-    <div style="max-width: 70em; margin:0 auto; padding: 1rem">
-      <div style="display: flex; align-items:center; padding-bottom: 1rem">
-        <div>
-          <div style="font-family: Helvetica, sans-serif;">
-            <span style="font-size:3rem;"><strong>NASA Harvest</strong></span>
-            <br>
-            <span style="font-size:2rem">Machine Learning</span>
+    <div id="content60">
+      <div style="display: flex; align-items:center;">
+        <div>  
+          <div id="logotext2">
+            <span id="span1">NASA Harvest</span><br>Machine Learning
           </div>
           <p>
             <a href="https://nasaharvest.org/">NASA Harvest</a> is NASA's agriculture and food security program.
@@ -46,32 +43,30 @@
         </div>
         <img src="assets/harvest-diagram.png" width="60%"/>
       </div>
-      <h2>Past Sessions</h2>
-      <table>
-        <tr>
-          <td>
-            Workshop: August 22-25, 2022<br>
-            
-          </td>
-          <td>
-            <a href="https://nasaharvest.github.io/rcmrd2022.html">Scalable Cropland Mapping</a>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            CVPR 2022 Tutorial: June 20, 2022<br>
-            
-          </td>
-          <td>
-            <a href="https://nasaharvest.github.io/cvpr2022.html">Machine Learning for Remote Sensing: Agriculture and Food Security</a>
-          </td>
-        </tr>
-      </table>
-      
 
-        <table id="profiles">
+      <br>
+      <h1 id="sessions">Sessions</h1>
+      <h2>Upcoming Sessions</h2>
+      <ul>
+        <li>
+          <p>
+            <a href="https://nasaharvest.github.io/ml-for-remote-sensing/iclr2023/">Machine Learning for Remote Sensing</a> 
+            | ICLR 2023 Workshop: May 5, 2023
+          </p>
+          <img src="assets/iclr2023-workshop-ad-v2.png"/>
+        </li>
+      </ul>
+      <br>
+      <h2>Past Sessions</h2>
+      <ul>
+        <li><p><a href="https://nasaharvest.github.io/rcmrd2022.html">Scalable Cropland Mapping</a> | In-house Workshop: August 22-25, 2022</p></li>
+        <li><p><a href="https://nasaharvest.github.io/cvpr2022.html">Machine Learning for Remote Sensing: Agriculture and Food Security</a> | CVPR 2022 Tutorial: June 20, 2022</p></li>
+      </ul>
+      
+      <br>
+      <table id="profiles">
           <tr>
-              <th colspan="4"><h2>Team</h2></th>
+              <th colspan="4"><h1>Team</h1></th>
           </tr>
           <tr>
             <td><img src="profiles/Kerner.png" class="profile"/></td> 
@@ -89,8 +84,8 @@
           <tr>
             <td><img src="profiles/Abena_AsareAnsah.jpg" class="profile"/></td>
             <td><img src="profiles/Adebowale.jpg" class="profile"/></td>
-            <td><img src="assets/logo.png" class="emptyprofile"/></td>
-            <td><img src="assets/logo.png" class="emptyprofile"/></td> 
+            <td><img src="assets/logo.png"/></td>
+            <td><img src="assets/logo.png"/></td> 
           </tr>
           <tr>
             <td>Abena Boatemaa Asare-Ansah<br>(University of Maryland)</td>
@@ -99,26 +94,19 @@
             <td>Aditya Shrivastava<br>(Arizona State University)</td>  
           </tr>
           <tr>
-            <td><img src="profiles/Parlikar.jpg" class="profile"/></td>
             <td><img src="assets/logo.png" class="emptyprofile"/></td>
             <td><img src="profiles/Baber.JPG" class="profile"/></td>
             <td><img src="assets/logo.png" class="emptyprofile"/></td>
+            <td><img src="assets/logo.png" class="emptyprofile"/></td
             <td></td> 
           </tr>
           <tr>
-            <td>Aniket Parlikar<br>(University of Maryland)</td>
             <td>Ekenedilichukwu Ndu<br>(University of Maryland)</td>
             <td>Sheila Baber<br>(University of Maryland)</td>
-            <td>Saketh Sundar<br>(River Hill High School)</td>   
+            <td>Saketh Sundar<br>(River Hill High School)</td>
+            <td>Manthan Satish<br>(Arizona State University)</td>   
           </tr>
           <tr>
-            <td><img src="assets/logo.png" class="emptyprofile"/></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Manthan Satish<br>(Arizona State University)</td>
             <td></td>
             <td></td>
             <td></td>   

@@ -5,8 +5,7 @@
     <base target="_blank">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
     <link rel="icon" href="data:image/svg+xml,
         <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
             <text y=%22.9em%22 font-size=%2290%22>🌎</text></svg>">
@@ -15,19 +14,20 @@
   
   <body>
     <!-- Header -->
-    <a href="https://nasaharvest.github.io/" style="color:inherit; text-decoration: none;">
-        <div class="header">
-            <img src="assets/logo.png" width="100rem"/>
-            <div class="logotext">
-                <span style="font-size:1.5rem;"><strong>NASA Harvest</strong></span>
-                <br>
-                <span style="font-size:1rem">Machine Learning</span>
+    <ul id="navbar">
+        <li id="logo">
+            <img src="assets/logo.png"/>
+            <div id="logotext">
+                <span id="span1">NASA Harvest</span><br>Machine Learning
             </div>
-        </div>
-    </a>
+        </li>
+        <li class="menu"><a href="https://nasaharvest.github.io/">About</a></li>
+        <li class="menu"><a href="https://nasaharvest.github.io/#sessions">Sessions</a></li>
+        <li class="menu"><a href="https://nasaharvest.github.io/#profiles">Team</a></li>
+    </ul>
     
     <!-- Main -->
-    <div style="max-width: 50em; margin:0 auto; padding: 1rem">
+    <div id="content50">
         <h1>Scalable Cropland Mapping Workshop </h1>
         <p style="line-height: 1.6;">
             Monday August 22, 2022  - Thursday August 25, 2022
@@ -248,8 +248,7 @@
                 <td><img src="profiles/Zvonkov.jpg" class="profile"></td>
                 <td><img src="profiles/Tseng.jpeg" class="profile"/></td>
                 <td><img src="profiles/Kerner.png" class="profile"/></td>
-                <td><img src="profiles/Nakalembe.jpeg" class="profile"/></td>
-                
+                <td><img src="profiles/Nakalembe.jpeg" class="profile"/></td> 
             </tr>
             <tr>
                 <td>Ivan Zvonkov<br>(University of Maryland)</td>
@@ -263,8 +262,8 @@
         <ul>
             <li>NASA Harvest Github organization: <a href="https://github.com/nasaharvest">https://github.com/nasaharvest</a> </li>
             <li>OpenMapFlow Github repository: <a href="https://github.com/nasaharvest/openmapflow">https://github.com/nasaharvest/openmapflow</a></li>
-            <li>Example W&B Project <a href="https://wandb.ai/nasa-harvest/crop-mask-example"/></li>
-            <li>CropHarvest Github repository <a href="https://github.com/nasaharvest/cropharvest"/></a></li>
+            <li>Example W&B Project: <a href="https://wandb.ai/nasa-harvest/crop-mask-example">https://wandb.ai/nasa-harvest/crop-mask-example</a></li>
+            <li>CropHarvest Github repository <a href="https://github.com/nasaharvest/cropharvest"/>https://github.com/nasaharvest/cropharves</a></li>
             <li><a href="https://docs.google.com/document/d/1UYxjAyhIkgTUiOCvRwsWo-JBV9y0jmHluC0zWqU5M-Q/edit"> Introduction to Earth Observation</a> (curated list of useful resources)</li>
             <li>NASA Harvest website: <a href="https://nasaharvest.org/">https://nasaharvest.org</a></li>
             <li>Radiant Earth ML Hub: <a href="https://mlhub.earth/">https://mlhub.earth/</a></li>
@@ -280,10 +279,8 @@
             <li>Tusubira, J. F., Akera, B., Nsumba, S., Nakatumba-Nabende, J., and Mwebaze, E. (2020). Scoring root necrosis in cassava using semantic segmentation. In CVPR Workshops 2020, <a href="https://arxiv.org/pdf/2005.03367.pdf">link</a>.</li>
         </ul>
 
-        <table id="profiles">
-            <tr>
-                <th colspan="2"><h2>Supported by</h2></th>
-            </tr>
+        <table id="sponsors">
+            <tr><th colspan="2"><h2>Supported by</h2></th></tr>
             <tr>
                 <td colspan="2"><img src="assets/Harvest_Header_Color_Horizontal_Text.png" style="max-height: 7em;"/></td>
             </tr>

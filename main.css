@@ -1,72 +1,50 @@
-body {
-    font-family: 'Source Sans Pro', sans-serif;
+body {font-family: 'Open Sans', sans-serif; margin: 0}
+h1 { font-size: 2.25em; color: #03264F; font-weight: bold;}
+h2 { font-size: 1.5em; color: #454545; font-weight: normal; }
+p { font-size: 1.15rem; color: #454545;}
+img { max-width: 50em; }
+td { font-size: 1.15em; padding: 0.3em 1em }
+
+#content60 { max-width: 60em; margin:0 auto; padding: 1rem; }
+#content50 { max-width: 60em; margin:0 auto; padding: 1rem; }
+
+#navbar {
+    background-color: ghostwhite; 
+    align-items:center; 
+    display: flex;
+    padding: 1rem;
     margin: 0
 }
-
-.header {
-    display: flex; 
-    align-items:center; 
-    padding: 1rem; 
-    background-color: ghostwhite;
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
-
-.logotext {
-    margin: 0 1rem; 
-    font-family: Helvetica, sans-serif; 
-    color: #03264F
-}
-
-h1, h2 {
-    font-family: 'Lora'; 
-}
-h1 {
-    margin-block-start: 0em;
-    font-size: 2em;
-}
-h2 {
-    margin-block-start: 1.5em;
-    font-size: 1.5em;
-}
-p {
-    font-size: 1.25em;
-}
-
-#profiles {
-    margin: 0 auto;
+.menu a {
+    display: block;
+    color: #454545;
     text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
+.menu a:hover:not(.active) { background-color: white; }
 
-.schedule, .schedule th, .schedule td{
-    border: 1px solid lightgray;
-    border-collapse: collapse;
-}
+#logo { display: flex; align-items:center; padding-right: 1em }
+#logo img { width: 6rem; }
+#logotext { margin: 0 1rem; color: #03264F; font-size: 1rem; }
+#logotext #span1 { font-size: 1.5rem; font-weight: bold; }
+#logotext2 { color: #03264F; font-size: 2rem;}
+#logotext2 #span1 { font-size: 3rem; font-weight: bold;}
 
-.schedule th {
-    font-size: 1.25em;
-}
+#profiles { margin: 0 auto; text-align: center; }
+#profiles img { max-width: 120px; }
+.profile { border: 3px solid green; border-radius: 50%; }
 
-td {
-    font-size: 1.2em;
-    padding: 0.3em 1em
-}
+#sponsors { margin: 0 auto; text-align: center; }
 
-img {
-    max-width: 50em;
-}
-
-iframe {
-    max-width: 35em;
-}
-
-.profile {
-    border: 3px solid green;
-    border-radius: 50%;
-    max-width: 120px;
-}
-
-.emptyprofile {
-    max-width: 120px;
-}
+.schedule, .schedule th, .schedule td{ border: 1px solid lightgray; border-collapse: collapse;}
+.schedule th { font-size: 1.25em; }
 
 
 
