@@ -17,6 +17,7 @@ td { font-size: 1.15rem; padding: 0.3em 1em }
     margin: 0;
     justify-content: space-between;
 }
+#navbar a {text-decoration:none}
 #logo { display: flex; align-items:center; padding-right: 3em }
 #logo img { width: 6rem; }
 #logotext { margin: 0 1rem;}
@@ -36,6 +37,9 @@ td { font-size: 1.15rem; padding: 0.3em 1em }
 .profile { border: 3px solid green; border-radius: 50%; }
 
 #sponsors { margin: 0 auto; text-align: center; }
+#partners {flex-wrap: wrap; display: flex;}
+#partners img { width: auto; padding: 1em}
+.column {float: left; width: 33%;}
 
 .schedule, .schedule th, .schedule td{ border: 1px solid lightgray; border-collapse: collapse;}
 .schedule th { font-size: 1.25em; }
