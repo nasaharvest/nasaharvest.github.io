@@ -1,25 +1,20 @@
-body {font-family: 'Open Sans', sans-serif; margin: 0}
-h1 { font-size: 2.25rem; color: #03264F; font-weight: bold;}
-h2 { font-size: 1.5rem; color: #454545; font-weight: normal; }
-h3 { font-size: 1.4rem; color: #03264F; font-weight: normal;}
-p { font-size: 1.15rem; color: #454545;}
-img { max-width: 50rem; width: 100%; margin: 0 auto; display: block}
-td { font-size: 1.15rem; padding: 0.3em 1em }
-
-#content60 { max-width: 60em; margin:0 auto; padding: 1rem; }
-#content50 { max-width: 60em; margin:0 auto; padding: 1rem; }
-
+body {font-family: 'Open Sans', sans-serif; color: #454545;}
+h1 {  color: #03264F; font-weight: bold;}
+h3 { color: #03264F; font-weight: normal;}
+img { max-width: 50em; width: 100%; display: block}
+td { padding: 0.5em 0.5em; }
+#content50 { max-width: 50em; margin:0 auto; padding: 1rem; }
 #navbar {
     background-color: ghostwhite; 
     align-items:center; 
     display: flex;
     padding: 1rem;
-    margin: 0;
+    margin:0 auto;
     justify-content: space-between;
 }
 #navbar a {text-decoration:none}
 #logo { display: flex; align-items:center; padding-right: 3em }
-#logo img { width: 6rem; }
+#logo img { width: 5rem; }
 #logotext { margin: 0 1rem;}
 #logotext h1, h3 {margin-block-start: 0; margin-block-end: 0;}
 
@@ -32,8 +27,8 @@ td { font-size: 1.15rem; padding: 0.3em 1em }
 }
 .menu a:hover:not(.active) { padding: 14px 16px; background-color: white; }
 
-#profiles { margin: 0 auto; text-align: center; }
-#profiles img { max-width: 120px; }
+#profiles { margin: 0 auto; text-align: center;}
+#profiles img { max-width: 120px; margin: 0 auto;}
 .profile { border: 3px solid green; border-radius: 50%; }
 
 #sponsors { margin: 0 auto; text-align: center; }
