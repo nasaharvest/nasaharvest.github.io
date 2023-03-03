@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Helmets Labeling Crops with Street2Sat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
+    <link rel="icon" href="data:image/svg+xml,
+        <svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>
+            <text y=%22.9em%22 font-size=%2290%22>🌎</text></svg>">
+    <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="main.css">
+  </head>
+  
+  <body>
+    <!-- Header -->
+    <div id="navbar">
+        <a href="https://nasaharvest.github.io/">
+            <div id="logo">
+                <img src="assets/logo.png"/>
+                <div id="logotext">
+                <h1>NASA Harvest</h1>
+                <h3>Machine Learning</h3>
+                </div>
+            </div>
+        </a>
+        <div class="menu">
+        <a href="https://nasaharvest.github.io/">About</a>
+        <a href="https://nasaharvest.github.io/#sessions">Sessions</a>
+        <a href="https://nasaharvest.github.io/#profiles">Team</a>
+        </div>
+    </div>
+    
+    <!-- Main -->
+    <div id="content50">
+        
+        <h1>Helmets Labeling Crops using Street2Sat</h1>
+        <a href="#helmets">Helmets Data Collection</a>
+        &nbsp;|&nbsp;
+        <a href="#street2sat">Street2Sat Pipeline</a>
+        &nbsp;|&nbsp;
+        <a href="#partners">Partners & Support</a>
+        <br>
+        <br>
+        <img src="assets/helmets-cover.png"/>
+
+        <p>
+            The Helmets Labeling Crops Project (“Helmets” for short) is developing 
+            and applying innovative, scalable data collection approaches that can 
+            inform machine learning (ML) tools to support higher-frequency crop-type 
+            mapping. Our data processing platform, called Street2Sat, transforms 
+            geo-tagged street-level images collected by Helmets GoPro cameras into a 
+            set of labeled geo-referenced points on crop fields that can be paired with 
+            satellite images for downstream tasks such as crop type mapping. 
+        </p>
+
+        <h1 id="helmets">Helmets Data Collection</h1>
+
+        <p>
+            To learn more about the data collection process check out the
+            <strong>Car and Motorbike Toolkit</strong> below: 
+            <br>(use full screen for best view)
+        </p>
+
+        <iframe 
+            src="https://docs.google.com/presentation/d/e/2PACX-1vQpP2f6dAcs_R0yrZ1dOpaKPQab0h-8BBLmwU-1cOfv462l6SMl5ng84A2HjBx4Qw/embed?start=false&loop=true&delayms=60000" 
+            frameborder="0" 
+            width="470" 
+            height="650" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+        </iframe>
+
+
+        <h1 id="street2sat">Street2Sat Pipeline</h1>
+        <p>The goal of Street2Sat is to turn geo-referenced images acquired from roads 
+            into geo-referenced labeled point samples with locations corresponding to 
+            objects of interest in the images. The pipeline consists of data collection, 
+            preprocessing, object detection, depth estimation, relocation, and 
+            quality assessment/control (QA/QC). For more details see paper linked below. </p>
+        <img src="assets/street2sat-pipeline.png"/>
+
+        <p>
+            Paliyam, M., Nakalembe, C., Kerner, H. (2021). Street2Sat: 
+            A Machine Learning Pipeline for Generating Ground-truth Geo-referenced 
+            Labeled Datasets from Street-Level Images. <em>Proceedings of the 
+            International Conference on Machine Learning (ICML) Workshops, 
+            Tackling Climate Change with AI.</em>
+            <br>
+            <a href="https://www.climatechange.ai/papers/icml2021/74.html">Paper</a>
+            &nbsp;
+            <a href="https://github.com/nasaharvest/street2sat">Code</a>
+        </p>
+        
+        
+        <h1 id="partners">Partners & Support</h1>
+        <ul>
+            <li>The Regional Universities Forum for Capacity Building in Agriculture (RUFORUM)</li>
+            <li>The Regional Center for Mapping of Resources (RCMRD)</li>
+            <li>The Center for Earth Observation and Citizen Science (EOCS-IIASA)</li>
+            <li>Radiant Earth Foundation</li>
+            <li>The Eastern Africa Grain Council (EAGC)</li>
+            <li>Lutheran World Relief Mali (LWR)</li>
+            <li>Makerere University Kampala, Uganda (MUK)</li>
+            <li>Sokoine University of Agriculture Tanzania (SUA)</li>
+            <li>International Maize and Wheat Improvement Center (CIMMYT)</li>
+        </ul>
+        <img src="assets/LacunaFund.png" style="max-width: 600px"/>
+    </div> 
+  </body>
+</html>

@@ -1,3 +1,4 @@
+html {scroll-behavior: smooth;}
 body {font-family: 'Open Sans', sans-serif; color: #454545; margin: 0}
 h1 {  color: #03264F; font-weight: bold;}
 h3 { color: #03264F; font-weight: normal;}
