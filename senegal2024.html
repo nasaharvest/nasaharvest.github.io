@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Senegal 2024</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
+    <link rel="icon" href="assets/NASA_Harvest_favicon.png">
+    <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="main.css">
+  </head>
+  
+  <body>
+    <!-- Header -->
+    <div id="navbar">
+        <a href="https://nasaharvest.github.io/">
+            <div id="logo">
+                <img src="assets/logo.png"/>
+                <div id="logotext">
+                <h1>Senegal Cropland Mapping Training 2024</h1>
+                <!-- <h3>Africa</h3> -->
+                </div>
+            </div>
+        </a>
+        <div class="menu">
+        <a href="https://nasaharvest.github.io/">About</a>
+        <a href="https://nasaharvest.github.io/#sessions">Sessions</a>
+        <a href="https://nasaharvest.github.io/#profiles">Team</a>
+        </div>
+    </div>
+    
+    <!-- Main -->
+    <div id="content50">
+        <!-- <a href="#schedule">Schedule</a>
+        &nbsp;|&nbsp;
+        <a href="#resources">Resrouces</a>
+        &nbsp;|&nbsp;
+        <a href="#partners">Partners</a>
+        <br> -->
+
+        <h1 id="schedule">Full Schedule</h1>
+        <h2>June 3-7, 2024</h2>
+        <iframe 
+            width="100%"
+            height="620"
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT72ONd1c1KltsDgI7Nn66zOGf0QlM3WU7fcNX6OtJ9FJZ7JGcbIrNSQhFXFk0uO1AREoQuXW_BBBsx/pubhtml?gid=1720718218&amp;single=true&amp;widget=true&amp;headers=false">
+        </iframe>
+        
+        <h1>Cropland Mapping Project</h1>
+        
+        <a href="https://code.earthengine.google.com/?accept_repo=users/izvonkov/crop-mapping-senegal">Google Earth Engine Repository containing all relevant scripts</a>
+        <br/><br/>
+
+        <h2>Presentation</h2>
+
+        <h3>1. Understand crops within the area of interest</h3>
+        <ul>
+            <li>Overview of region (geography, location, population)</li>
+            <li>Climatology (climate zones, precipitation patterns)</li>
+            <li>Physical characteristics (soils, elevation)</li>
+            <li>Socioeconomic factors (economics, agriculture, food security, staple foods)</li>
+            <li>Crop dynamics (challenges in crop production, crop calendars)</li>
+        </ul>
+        
+
+        <h3>2. Analysis of two existing maps</h3>
+        <ul>
+            <li>Visual Assessment [relevant script: 1_Worldcover_cropland, 2_visualizing_all_maps]</li>
+            <li>Accuracy Assessment [relevant script: 3_Worldcover_cropland_accuracy]</li>
+        </ul>
+
+        <h3>3. Create cropland for the region</h3>
+        <ul>
+            <li>Overview of the mapping approach</li>
+            <li>Datasets used (satellite imagery [relevant script: 4_Sentinel2], ground truth data)</li>
+            <li>Models and algorithms employed</li>
+            <li>Visual Assessment [relevant script: 5_classification]</li>
+            <li>Accuracy Assessment [relevant script: 3_Worldcover_cropland_accuracy]</li>
+            <li>Conclusion (key findings, future directions and recommendations)</li>
+        </ul>
+        
+
+        <h2>Regions of Interest</h2>
+        Group 1 Google Earth Engine Boundary code:
+        <pre style="background-color: lightgray">
+    <code>
+    var AEZ = ee.FeatureCollection("users/izvonkov/Senegal/ZEF_AgroEcoZones")
+
+    function getAOIFromAEZ(zoneList){
+    return AEZ.filter(ee.Filter.inList('Zone', ee.List(zoneList)))
+    }
+
+    var RiverValleyAndFerlo = getAOIFromAEZ(["Senegal River Valley", "Ferlo"])
+    Map.addLayer(RiverValleyAndFerlo, {}, "River Valley and Ferlo")
+    </code>
+        </pre>
+
+
+Group 2 Google Earth Engine Boundary code:
+<pre style="background-color: lightgray">
+    <code>
+
+    var AEZ = ee.FeatureCollection("users/izvonkov/Senegal/ZEF_AgroEcoZones")
+
+    function getAOIFromAEZ(zoneList){
+    return AEZ.filter(ee.Filter.inList('Zone', ee.List(zoneList)))
+    }
+
+    var NiayesAndGroundnutBasin = getAOIFromAEZ(["Niayes", "Groundnut Basin"])
+    Map.addLayer(NiayesAndGroundnutBasin, {}, "Niayes and Groundnut Basin")
+    </code>
+</pre>
+
+
+Group 3 Google Earth Engine Boundary code:
+<pre style="background-color: lightgray">
+    <code>
+    var AEZ = ee.FeatureCollection("users/izvonkov/Senegal/ZEF_AgroEcoZones")
+
+    function getAOIFromAEZ(zoneList){
+    return AEZ.filter(ee.Filter.inList('Zone', ee.List(zoneList)))
+    }
+
+    var CasamanceAndEastern = getAOIFromAEZ(["Casamance", "Eastern Senegal"])
+    Map.addLayer(CasamanceAndEastern, {}, "Casamance and Eastern")
+    </code>
+</pre>
+
+
+
+       
+
+        
+        
+
+        <!-- <h1 id="partners">Partners</h1>
+        <div id="partners">
+            <div class="column">
+                <img 
+                    src="assets/Harvest_Header_Color_Horizontal_Text.png" 
+                    style="max-height: 5em;"/>
+                
+                
+            </div>
+            <div class="column">
+                <img src="assets/umd-logo.png" style="max-height: 4.5em;"/>
+                
+            </div>
+            <div class="column">
+                
+            </div>
+        </div>  -->
+    </div> 
+  </body>
+</html>
