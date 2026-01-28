@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Honopou Stream — Water Year Cups (USGS live + mean)</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { margin:0; background:#0b1220; color:#e8eefc; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+    #wrap { max-width:1100px; margin:24px auto 48px; padding:0 16px; }
+    canvas { border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+    .row { display:flex; gap:12px; align-items:center; margin:12px 0 6px; flex-wrap:wrap;}
+    button, select { background:#172038; color:#e8eefc; border:1px solid #30406a; border-radius:10px; padding:8px 12px; font-size:14px; cursor:pointer; }
+    .legend { display:flex; gap:12px; flex-wrap:wrap; margin-left:auto;}
+    .key { display:flex; align-items:center; gap:8px; }
+    .swatch { width:14px; height:14px; border-radius:4px; }
+    .muted { color:#9fb1d9; font-size:13px; }
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <h1 style="margin:0 0 8px">Water Into a Cup — USGS Streamflow Timelapse</h1>
+  <div class="row">
+    <button id="playBtn">▶ Play</button>
+    <button id="restartBtn">↺ Restart</button>
+    <label>Speed
+      <select id="speedSel">
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+    </label>
+    <div class="legend">
+      <div class="key"><span class="swatch" style="background:#5cb0ff"></span> Highest</div>
+      <div class="key"><span class="swatch" style="background:#40e0d0"></span> Mean (Normal)</div>
+      <div class="key"><span class="swatch" style="background:#e8e8e8"></span> 2025 (Current)</div>
+      <div class="key"><span class="swatch" style="background:#ff934f"></span> Lowest</div>
+    </div>
+  </div>
+  <div class="muted" id="siteMeta">USGS 16587000 • Cumulative million ft³ per water year (Oct 1–Sep 30)</div>
+  <div id="p5-holder" style="margin-top:10px;"></div>
+</div>
+
+<script>
+/* ===================== CONFIG ===================== */
+const SITE = '16587000';   // Honopou Stream near Huelo, Maui
+const PARAM = '00060';     // discharge, ft³/s
+const WY = 2025;           // water year
+const HIST_YEARS = [1914, 1981];
+
+const COLORS = ['#5cb0ff', '#40e0d0', '#e8e8e8', '#ff934f']; // Highest, Current, Lowest, mean
+const TITLES = ['Highest (1914)','Mean (Normal)','2025 (Observed)','Lowest (1981)'];
+const BG = '#0b1220', PANEL = '#0f1628', RIM = '#7e8bb6', GRID = '#243255';
+
+/* ================== STATE ================== */
+let W=800,H=600;
+let cups=[], labels=[], raw=null;
+let globalMax=1;
+let t=0, playing=false, speedMult=1;
+let siteInfo = { name: '', site: SITE, lat: null, lon: null, tz: '' };
+let monthTicks = [];
+
+/* ========== Helpers ========== */
+const fmt = (d) => d.toISOString().slice(0,10);
+function wyRange(year){
+  return {
+    start: fmt(new Date(`${year-1}-10-01T00:00:00Z`)),
+    end:   fmt(new Date(`${year}-09-30T00:00:00Z`))
+  };
+}
+function md(dateStr){ return dateStr.slice(5,10); } // "YYYY-MM-DD" -> "MM-DD"
+
+async function fetchJSON(url){
+  const r = await fetch(url);
+  if(!r.ok){
+    const text = await r.text().catch(()=> '');
+    throw new Error(`Fetch failed ${r.status}: ${r.statusText} ${text}`);
+  }
+  return r.json();
+}
+
+/* ========== USGS Daily Values ========== */
+async function fetchDVRaw(site, startISO, endISO){
+  const url=`https://waterservices.usgs.gov/nwis/dv/?format=json&sites=${site}&parameterCd=${PARAM}&startDT=${startISO}&endDT=${endISO}`;
+  return fetchJSON(url);
+}
+function parseDV(json){
+  const ts = json?.value?.timeSeries?.[0];
+  const vals = ts?.values?.[0]?.value ?? [];
+  const dv = vals.map(v => ({ date: v.dateTime.slice(0,10), cfs: v.value===''?null:+v.value }));
+  const si = ts?.sourceInfo || {};
+  const siteName = si.siteName || '';
+  const siteCode = (si.siteCode && si.siteCode[0]?.value) || SITE;
+  const lat = si.geoLocation?.geogLocation?.latitude ?? null;
+  const lon = si.geoLocation?.geogLocation?.longitude ?? null;
+  const tz = si.timeZoneInfo?.defaultTimeZone?.zoneAbbreviation || '';
+  return { dv, meta: { name: siteName, site: siteCode, lat, lon, tz } };
+}
+function cfsToCumMcf(dailies){
+  const SEC_PER_DAY=86400; let cum=0; const out=[];
+  for(const d of dailies){ cum+=(d.cfs??0)*SEC_PER_DAY; out.push(cum/1e6); }
+  return out;
+}
+
+/* ========== USGS observationNormals (mean) ========== */
+/** Fetch daily mean normals for parameter 00060. Returns Map("MM-DD" -> Number cfs). */
+async function fetchNormalsmean(monitoringId = `USGS-${SITE}`, param = PARAM){
+  const base = 'https://api.waterdata.usgs.gov/statistics/v0/observationNormals';
+  const qs = new URLSearchParams({
+    approval_status: 'approved',
+    computation_type: 'arithmetic_mean',
+    country_code: 'US',
+    mime_type: 'application/json',
+    monitoring_location_id: monitoringId,
+    page_size: '1000'
+  });
+  const url = `${base}?${qs.toString()}`;
+  const json = await fetchJSON(url);
+
+  const features = json?.features ?? [];
+  if(!features.length) throw new Error('No features in normals response');
+
+  const dataBlocks = features[0]?.properties?.data ?? [];
+  const block = dataBlocks.find(d => d.parameter_code === param);
+  if(!block) throw new Error('No matching parameter_code in normals');
+
+  const days = block.values.filter(v => v.time_of_year_type === 'day_of_year');
+  const map = new Map();
+  for(const row of days){
+    map.set(row.time_of_year, Number(row.value));
+  }
+  return map;
+}
+
+/** Map normals (cfs) to this WY’s daily labels and integrate to cumulative Mft³. */
+function meanSeriesForWaterYear(labels, normalsByMD){
+  const daily = labels.map(d => {
+    const key = md(d);
+    const cfs = normalsByMD.get(key);
+    return { date:d, cfs: Number.isFinite(cfs) ? cfs : 0 };
+  });
+  return cfsToCumMcf(daily);
+}
+
+/* ---- Stats from subset of years ---- */
+function perDayStats(yearly){
+  const n=Math.min(...yearly.map(a=>a.length));
+  const hi=[], lo=[];
+  for(let i=0;i<n;i++){
+    const vals=yearly.map(a=>a[i]).filter(Number.isFinite).sort((a,b)=>a-b);
+    hi[i]=vals.at(-1);
+    lo[i]=vals[0];
+  }
+  return {highest:hi, lowest:lo, n};
+}
+function buildMonthTicksFromLabels(lbls){
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const ticks = []; let prevMonth = -1;
+  for(let i=0;i<lbls.length;i++){
+    const d = new Date(lbls[i] + 'T00:00:00Z');
+    const m = d.getUTCMonth();
+    if (m !== prevMonth) {
+      ticks.push({ i, label: `${months[m]} ${d.getUTCFullYear()}` });
+      prevMonth = m;
+    }
+  }
+  return ticks;
+}
+
+/* ========== p5 setup/draw ========== */
+async function setup(){
+  const c=createCanvas(W,H); c.parent('p5-holder'); frameRate(60);
+
+  // UI
+  const playBtn = document.getElementById('playBtn');
+  const restartBtn = document.getElementById('restartBtn');
+  playBtn.onclick = () => { playing = !playing; playBtn.textContent = playing ? '⏸ Pause' : '▶ Play'; };
+  restartBtn.onclick = () => { t = 0; playing = true; playBtn.textContent = '⏸ Pause'; };
+  document.getElementById('speedSel').onchange=(e)=>speedMult=parseFloat(e.target.value);
+
+  try{
+    // Current WY
+    const {start:cs,end:ce}=wyRange(WY);
+    const curRaw = await fetchDVRaw(SITE,cs,ce);
+    const parsed = parseDV(curRaw);
+    const curCum = cfsToCumMcf(parsed.dv);
+    labels = parsed.dv.map(d=>d.date);
+    siteInfo = parsed.meta;
+
+    // Site metadata
+    const metaEl = document.getElementById('siteMeta');
+    const parts = [];
+    if(siteInfo.name) parts.push(siteInfo.name);
+    parts.push(`USGS ${siteInfo.site||SITE}`);
+    if(siteInfo.lat != null && siteInfo.lon != null) parts.push(`${siteInfo.lat.toFixed(4)}, ${siteInfo.lon.toFixed(4)}`);
+    if(siteInfo.tz) parts.push(siteInfo.tz);
+    metaEl.textContent = parts.join(' • ') + ' • Cumulative million ft³ per water year (Oct 1–Sep 30)';
+
+    // Subset history → highest/lowest envelopes
+    const histCum=[];
+    for(const y of HIST_YEARS){
+      try{
+        const {start:hs,end:he}=wyRange(y);
+        const jr = await fetchDVRaw(SITE,hs,he);
+        histCum.push(cfsToCumMcf(parseDV(jr).dv));
+      }catch(e){}
+    }
+    const stats=perDayStats(histCum);
+    const n=Math.min(curCum.length,stats.n);
+
+    // mean normals → cumulative
+    let meanCum = [];
+    try{
+      const normals = await fetchNormalsmean(`USGS-${SITE}`, PARAM);
+      meanCum = meanSeriesForWaterYear(labels.slice(0,n), normals);
+    }catch(err){
+      console.warn('Normals mean fetch/parse failed:', err);
+      meanCum = Array(n).fill(NaN);
+    }
+
+    raw={
+      highest:stats.highest.slice(0,n),
+      current:curCum.slice(0,n),
+      lowest: stats.lowest.slice(0,n),
+      mean: meanCum.slice(0,n)
+    };
+    globalMax = Math.max(
+      ...raw.highest,
+      ...raw.current.filter(Number.isFinite),
+      ...raw.lowest.filter(Number.isFinite),
+      ...raw.mean.filter(Number.isFinite)
+    );
+    monthTicks = buildMonthTicksFromLabels(labels.slice(0,n));
+
+    // auto-play once loaded
+    playing=true;
+    playBtn.textContent='⏸ Pause';
+  }catch(e){
+    console.warn("USGS fetch failed",e);
+  }
+}
+
+function draw(){
+  background(BG);
+  if(!raw){
+    fill('#9fb1d9');textAlign(CENTER,CENTER);text("Loading USGS data…",W/2,H/2);
+    return;
+  }
+  computeCupLayout();
+  drawHeader();
+
+  const i=Math.min(Math.floor(t),raw.current.length-1);
+  const vals=[raw.highest[i], raw.mean[i], raw.current[i], raw.lowest[i]];
+  for (let k=0;k<4;k++){
+    const v = vals[k];
+    drawCup(cups[k], (Number.isFinite(v)?v:0)/globalMax, COLORS[k], TITLES[k], v);
+  }
+  drawMiniChart(i);
+
+  if(playing){
+    t+=0.5*speedMult;
+    if(t>=raw.current.length-1){ t=raw.current.length-1; playing=false; document.getElementById('playBtn').textContent='▶ Play'; }
+  }
+}
+
+/* ========== Drawing helpers ========== */
+function computeCupLayout(){
+  cups=[];
+  const m=16;
+  const cupW=(W - m*5)/4;   // 4 cups
+  const cupH=H*0.50;
+  const top=84;
+  for(let i=0;i<4;i++){ cups.push({x:m+i*(cupW+m),y:top,w:cupW,h:cupH}); }
+}
+function drawHeader(){
+  fill('#9fb1d9');noStroke();textSize(14);
+  textAlign(LEFT,CENTER);text("Cumulative volume (million ft³)",24,28);
+  textAlign(RIGHT,CENTER);text(labels[Math.min(Math.floor(t),labels.length-1)],W-24,28);
+}
+function drawCup(box,pct,col,title,val){
+  noStroke();fill(PANEL);rect(box.x,box.y,box.w,box.h,14);
+  const pad=16,gx=box.x+pad,gy=box.y+pad;const gw=box.w-pad*2,gh=box.h-58;
+  stroke(RIM);strokeWeight(2);noFill();rect(gx,gy,gw,gh,16);
+  const level=gh*pct;const waterTop=gy+gh-level;
+  noStroke();fill(col);rect(gx+2,waterTop,gw-4,level,14);
+  // labels
+  fill('#cfe0ff');noStroke();textAlign(LEFT,BASELINE);textSize(14);
+  text(title,gx,box.y+box.h-26);
+  textAlign(RIGHT,BASELINE);fill('#9fb1d9');
+  const txt = Number.isFinite(val) ? val.toFixed(0)+" Mft³" : "—";
+  text(txt,gx+gw,box.y+box.h-26);
+}
+
+function drawMiniChart(i){
+  const left=60,right=W-24,bottom=H-26,top=H-170;
+
+  // Frame
+  stroke(GRID);noFill();rect(left,top,right-left,bottom-top);
+
+  // Y-axis ticks
+  const ticks=10;
+  textSize(11);fill('#9fb1d9');noStroke();textAlign(RIGHT,CENTER);
+  for(let j=0;j<=ticks;j++){
+    const frac=j/ticks, val=globalMax*frac;
+    const y=map(val,0,globalMax,bottom-4,top+4);
+    stroke(GRID);line(left-4,y,right,y);
+    noStroke();text(val.toFixed(0),left-8,y);
+  }
+
+  // Lines (Highest, Current, Lowest, mean)
+  const names=['highest','mean','current','lowest'];
+  for(let n=0;n<names.length;n++){
+    const arr=raw[names[n]];
+    if(!arr || !arr.length) continue;
+    stroke(COLORS[n]);noFill();beginShape();
+    for(let d=0;d<arr.length;d++){
+      const x=map(d,0,arr.length-1,left+4,right-4);
+      const y=map(arr[d],0,globalMax,bottom-4,top+4);
+      vertex(x,y);
+    }
+    endShape();
+    const cx=map(i,0,arr.length-1,left+4,right-4);
+    const cy=map(arr[i],0,globalMax,bottom-4,top+4);
+    fill(COLORS[n]);noStroke();circle(cx,cy,6);
+  }
+
+  // X-axis month ticks
+  textSize(11);fill('#9fb1d9');noStroke();textAlign(CENTER,TOP);
+  for(const tick of monthTicks){
+    const x=map(tick.i,0,raw.current.length-1,left+4,right-4);
+    stroke(GRID);line(x,bottom,x,bottom+6);
+    noStroke();text(tick.label,x,bottom+8);
+  }
+
+  // Axis labels
+  noStroke();fill('#9fb1d9');textSize(12);textAlign(LEFT,TOP);text("Cumulative volume (Mft³)",left,top-18);
+  textAlign(RIGHT,TOP);text("Water Year timeline (monthly)",right,top-18);
+}
+</script>
+</body>
+</html>
