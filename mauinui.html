@@ -7,6 +7,30 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,300" rel="stylesheet" type="text/css">
     <link rel="icon" href="assets/NASA_Harvest_favicon.png">
     <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="main.css">
+            <style>
+          .issue-cells{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.6em;
+            margin-top: 0.5em;
+          }
+          .issue-cell{
+            display: block;
+            padding: 0.75em 0.9em;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 0.75em;
+            text-decoration: none;
+            line-height: 1.2;
+          }
+          .issue-cell:hover{
+            border-color: rgba(0,0,0,0.35);
+            transform: translateY(-1px);
+          }
+          #newsletter-content,
+          #partners {
+            display: flow-root;
+          }
+        </style>
   </head>
   
   <body>
@@ -207,38 +231,14 @@
           </div>
         </div>
 
-      <iframe
-        src="https://ee-anatarano.projects.earthengine.app/view/vcimauinui"
-        style="width:500px; height:500px; border:0; display:block; margin: 1em 0;"
-        loading="lazy"
-      ></iframe>
+        <iframe
+          src="https://ee-anatarano.projects.earthengine.app/view/vcimauinui"
+          style="width:500px; height:500px; border:0; display:block; margin: 1em 0;"
+          loading="lazy"
+        ></iframe>
 
-        
-        <style>
-          .issue-cells{
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.6em;
-            margin-top: 0.5em;
-          }
-          .issue-cell{
-            display: block;
-            padding: 0.75em 0.9em;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 0.75em;
-            text-decoration: none;
-            line-height: 1.2;
-          }
-          .issue-cell:hover{
-            border-color: rgba(0,0,0,0.35);
-            transform: translateY(-1px);
-          }
-          #newsletter-content,
-          #partners {
-            display: flow-root;
-          }
-        </style>
-        
+        <div style="clear: both;"></div>
+      
         <h1 id="partners">Partners</h1>
         <div id="partners">
             <div class="column">
