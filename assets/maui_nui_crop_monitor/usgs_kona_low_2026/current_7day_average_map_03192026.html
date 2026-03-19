@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2acd5aeadce7538418189fe5645949e8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+                    <style>
+                        .foliumtooltip {
+                            
+                        }
+                       .foliumtooltip table{
+                            margin: auto;
+                        }
+                        .foliumtooltip tr{
+                            text-align: left;
+                        }
+                        .foliumtooltip th{
+                            padding: 2px; padding-right: 8px;
+                        }
+                    </style>
+            
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>$( function() {
+        $( ".maplegend" ).draggable({
+            start: function (event, ui) {
+                $(this).css({
+                    right: "auto",
+                    top: "auto",
+                    bottom: "auto"
+                });
+            }
+        });
+    });
+    </script>
+    <style type='text/css'>
+      .maplegend {
+        position: absolute;
+        z-index:9999;
+        background-color: rgba(255, 255, 255, .8);
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        padding: 10px;
+        font: 12px/14px Arial, Helvetica, sans-serif;
+        right: 10px;
+        bottom: 20px;
+      }
+      .maplegend .legend-title {
+        text-align: left;
+        margin-bottom: 5px;
+        font-weight: bold;
+        }
+      .maplegend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 0px;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .maplegend .legend-scale ul li {
+        list-style: none;
+        margin-left: 0;
+        line-height: 16px;
+        margin-bottom: 2px;
+        }
+      .maplegend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 14px;
+        width: 14px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 0px solid #ccc;
+        }
+      .maplegend .legend-source {
+        color: #777;
+        clear: both;
+        }
+      .maplegend a {
+        color: #777;
+        }
+    </style>
+    
+</head>
+<body>
+    
+    
+    <div id='maplegend Current 7-Day Average<br> Streamflow  Category' class='maplegend'>
+        <div class='legend-title'>Current 7-Day Average<br> Streamflow  Category</div>
+        <div class='legend-scale'>
+            <ul class='legend-labels'>
+                <li><span style='background:#e82f3e'></span>All-time low for this day</li>
+                <li><span style='background:#b24249'></span>Much below normal</li>
+                <li><span style='background:#e8ac49'></span>Below normal</li>
+                <li><span style='background:#44f24e'></span>Normal</li>
+                <li><span style='background:#5fd7d9'></span>Above normal</li>
+                <li><span style='background:#2641f1'></span>Much above normal</li>
+                <li><span style='background:#1f296b'></span>All-time high for this day</li>
+                <li><span style='background:#d3d3d3'></span>Not Ranked</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_2acd5aeadce7538418189fe5645949e8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2acd5aeadce7538418189fe5645949e8 = L.map(
+                "map_2acd5aeadce7538418189fe5645949e8",
+                {
+                    center: [20.69368055499998, -157.40541665],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_2acd5aeadce7538418189fe5645949e8);
+
+            
+
+        
+    
+            var tile_layer_e158ba880960dd68a7e3f9161f848309 = L.tileLayer(
+                "https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e158ba880960dd68a7e3f9161f848309.addTo(map_2acd5aeadce7538418189fe5645949e8);
+        
+    
+            map_2acd5aeadce7538418189fe5645949e8.fitBounds(
+                [[19.20777778, -159.6600833], [22.179583329999954, -155.15075]],
+                {}
+            );
+        
+    
+        function geo_json_194625e7cf8b99305059f7ad823ba20a_styler(feature) {
+            switch(feature.id) {
+                case "0": case "11": case "13": case "27": case "42": case "52": case "53": case "55": case "56": case "69": 
+                    return {"color": "#5fd7d9", "fillColor": "#5fd7d9", "fillOpacity": 0.5, "weight": 2};
+                case "1": case "2": case "3": case "4": case "7": case "8": case "9": case "12": case "14": case "20": case "21": case "22": case "23": case "25": case "26": case "28": case "29": case "34": case "37": case "38": case "39": case "40": case "41": case "43": case "44": case "45": case "46": case "50": case "51": case "57": case "60": case "61": case "62": case "67": case "68": case "70": 
+                    return {"color": "#2641f1", "fillColor": "#2641f1", "fillOpacity": 0.5, "weight": 2};
+                case "10": case "15": case "47": case "63": case "64": case "65": case "66": 
+                    return {"color": "#44f24e", "fillColor": "#44f24e", "fillOpacity": 0.5, "weight": 2};
+                case "35": 
+                    return {"color": "#d3d3d3", "fillColor": "#d3d3d3", "fillOpacity": 0.5, "weight": 2};
+                default:
+                    return {"color": "#1f296b", "fillColor": "#1f296b", "fillOpacity": 0.5, "weight": 2};
+            }
+        }
+        function geo_json_194625e7cf8b99305059f7ad823ba20a_highlighter(feature) {
+            switch(feature.id) {
+                default:
+                    return {"fillOpacity": 0.75};
+            }
+        }
+        function geo_json_194625e7cf8b99305059f7ad823ba20a_pointToLayer(feature, latlng) {
+            var opts = {
+  "stroke": true,
+  "color": "#3388ff",
+  "weight": 3,
+  "opacity": 1.0,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": null,
+  "dashOffset": null,
+  "fill": true,
+  "fillColor": "#3388ff",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "radius": 5,
+};
+            
+            let style = geo_json_194625e7cf8b99305059f7ad823ba20a_styler(feature)
+            Object.assign(opts, style)
+            
+            return new L.CircleMarker(latlng, opts)
+        }
+
+        function geo_json_194625e7cf8b99305059f7ad823ba20a_onEachFeature(feature, layer) {
+
+            layer.on({
+                mouseout: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                            geo_json_194625e7cf8b99305059f7ad823ba20a.resetStyle(e.target);
+                    }
+                },
+                mouseover: function(e) {
+                    if(typeof e.target.setStyle === "function"){
+                        const highlightStyle = geo_json_194625e7cf8b99305059f7ad823ba20a_highlighter(e.target.feature)
+                        e.target.setStyle(highlightStyle);
+                    }
+                },
+            });
+        };
+        var geo_json_194625e7cf8b99305059f7ad823ba20a = L.geoJson(null, {
+                onEachFeature: geo_json_194625e7cf8b99305059f7ad823ba20a_onEachFeature,
+            
+                style: geo_json_194625e7cf8b99305059f7ad823ba20a_styler,
+                pointToLayer: geo_json_194625e7cf8b99305059f7ad823ba20a_pointToLayer,
+            ...{
+}
+        });
+
+        function geo_json_194625e7cf8b99305059f7ad823ba20a_add (data) {
+            geo_json_194625e7cf8b99305059f7ad823ba20a
+                .addData(data);
+        }
+            geo_json_194625e7cf8b99305059f7ad823ba20a_add({"bbox": [-159.6600833, 19.20777778, -155.15075, 22.179583329999954], "features": [{"bbox": [-159.6199444, 22.132805560000026, -159.6199444, 22.132805560000026], "geometry": {"coordinates": [-159.6199444, 22.132805560000026], "type": "Point"}, "id": "0", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 104.47, "Estimated Percentile": 87.74, "Streamflow Category": "Above normal", "Streamgage Name": "Kawaikoi Stream nr Waimea, Kauai, HI", "USGS Gage ID": "16010000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 50.0, "alt_datum_cd": "LMSL", "alt_va": 3420.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.13280556, "dec_long_va": -159.6199444, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.64830559999996, 22.075111099999997, -159.64830559999996, 22.075111099999997], "geometry": {"coordinates": [-159.64830559999996, 22.075111099999997], "type": "Point"}, "id": "1", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 289.41, "Estimated Percentile": 96.45, "Streamflow Category": "Much above normal", "Streamgage Name": "Waimea River US of Kekaha-Waiahulu Int., Kauai, HI", "USGS Gage ID": "16016000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 780.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.0751111, "dec_long_va": -159.6483056, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.5690833, 22.085833330000003, -159.5690833, 22.085833330000003], "geometry": {"coordinates": [-159.5690833, 22.085833330000003], "type": "Point"}, "id": "2", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 113.18, "Estimated Percentile": 95.83, "Streamflow Category": "Much above normal", "Streamgage Name": "Waialae Str at alt 3,820 ft nr Waimea, Kauai, HI", "USGS Gage ID": "16019000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 3820.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.08583333, "dec_long_va": -159.5690833, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.6600833, 21.980388890000043, -159.6600833, 21.980388890000043], "geometry": {"coordinates": [-159.6600833, 21.980388890000043], "type": "Point"}, "id": "3", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 1027.71, "Estimated Percentile": 98.08, "Streamflow Category": "Much above normal", "Streamgage Name": "Waimea River near Waimea, Kauai, HI", "USGS Gage ID": "16031000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.1, "alt_datum_cd": "LMSL", "alt_va": 19.7, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.98038889, "dec_long_va": -159.6600833, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.5507778, 21.954916669999992, -159.5507778, 21.954916669999992], "geometry": {"coordinates": [-159.5507778, 21.954916669999992], "type": "Point"}, "id": "4", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 652.0, "Estimated Percentile": 95.45, "Streamflow Category": "Much above normal", "Streamgage Name": "Hanapepe Riv blw Manuahi Str nr Eleele, Kauai, HI", "USGS Gage ID": "16049000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 1.0, "alt_datum_cd": "LMSL", "alt_va": 222.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.95491667, "dec_long_va": -159.5507778, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.5048056, 21.939316669999965, -159.5048056, 21.939316669999965], "geometry": {"coordinates": [-159.5048056, 21.939316669999965], "type": "Point"}, "id": "5", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 46.16, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Right Branch Lawai Stream nr Umauma Rd, Kauai, HI", "USGS Gage ID": "16052350", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 1.6, "alt_datum_cd": "LMSL", "alt_va": 670.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.93931667, "dec_long_va": -159.5048056, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.4650556, 22.02269444, -159.4650556, 22.02269444], "geometry": {"coordinates": [-159.4650556, 22.02269444], "type": "Point"}, "id": "6", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 208.01, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waiahi Str US Upper Powerhouse, Kauai, HI", "USGS Gage ID": "16057900", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 815.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.02269444, "dec_long_va": -159.4650556, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.3801667, 22.03669444000001, -159.3801667, 22.03669444000001], "geometry": {"coordinates": [-159.3801667, 22.03669444000001], "type": "Point"}, "id": "7", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 903.0, "Estimated Percentile": 98.14, "Streamflow Category": "Much above normal", "Streamgage Name": "SF Wailua River nr Lihue, Kauai, HI", "USGS Gage ID": "16060000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 240.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.03669444, "dec_long_va": -159.3801667, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.41516669999996, 22.068777780000026, -159.41516669999996, 22.068777780000026], "geometry": {"coordinates": [-159.41516669999996, 22.068777780000026], "type": "Point"}, "id": "8", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 127.0, "Estimated Percentile": 90.88, "Streamflow Category": "Much above normal", "Streamgage Name": "EB of NF Wailua River nr Lihue, Kauai, HI", "USGS Gage ID": "16068000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 500.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.06877778, "dec_long_va": -159.4151667, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.3958889, 22.075611100000014, -159.3958889, 22.075611100000014], "geometry": {"coordinates": [-159.3958889, 22.075611100000014], "type": "Point"}, "id": "9", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 12.86, "Estimated Percentile": 92.59, "Streamflow Category": "Much above normal", "Streamgage Name": "Left Branch Opaekaa Str nr Kapaa, Kauai, HI", "USGS Gage ID": "16071500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 458.4, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.0756111, "dec_long_va": -159.3958889, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.418611, 22.178638890000016, -159.418611, 22.178638890000016], "geometry": {"coordinates": [-159.418611, 22.178638890000016], "type": "Point"}, "id": "10", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 10.91, "Estimated Percentile": 70.06, "Streamflow Category": "Normal", "Streamgage Name": "Halaulani Str at alt 400 ft nr Kilauea, Kauai, HI", "USGS Gage ID": "16097500", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 391.8, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.17863889, "dec_long_va": -159.418611, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.4663889, 22.179583329999954, -159.4663889, 22.179583329999954], "geometry": {"coordinates": [-159.4663889, 22.179583329999954], "type": "Point"}, "id": "11", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 468.71, "Estimated Percentile": 84.87, "Streamflow Category": "Above normal", "Streamgage Name": "Hanalei River nr Hanalei, Kauai, HI", "USGS Gage ID": "16103000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 60.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.17958333, "dec_long_va": -159.4663889, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-159.557861, 22.13588889, -159.557861, 22.13588889], "geometry": {"coordinates": [-159.557861, 22.13588889], "type": "Point"}, "id": "12", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 400.76, "Estimated Percentile": 91.68, "Streamflow Category": "Much above normal", "Streamgage Name": "Wainiha River nr Hanalei, Kauai, HI", "USGS Gage ID": "16108000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 960.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 22.13588889, "dec_long_va": -159.557861, "huc_cd": 20070000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.9453056, 21.51627777999995, -157.9453056, 21.51627777999995], "geometry": {"coordinates": [-157.9453056, 21.51627777999995], "type": "Point"}, "id": "13", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 53.39, "Estimated Percentile": 88.41, "Streamflow Category": "Above normal", "Streamgage Name": "NF Kaukonahua Str abv RB, nr Wahiawa, Oahu, HI", "USGS Gage ID": "16200000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1150.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.51627778, "dec_long_va": -157.9453056, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.99605559999998, 21.488805559999978, -157.99605559999998, 21.488805559999978], "geometry": {"coordinates": [-157.99605559999998, 21.488805559999978], "type": "Point"}, "id": "14", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 127.54, "Estimated Percentile": 90.15, "Streamflow Category": "Much above normal", "Streamgage Name": "SF Kaukonahua Str at E pump, nr Wahiawa, Oahu, HI", "USGS Gage ID": "16208000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 860.35, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.48880556, "dec_long_va": -157.9960556, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.05102779999999, 21.500555560000002, -158.05102779999999, 21.500555560000002], "geometry": {"coordinates": [-158.05102779999999, 21.500555560000002], "type": "Point"}, "id": "15", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 9.13, "Estimated Percentile": 57.4, "Streamflow Category": "Normal", "Streamgage Name": "Wahiawa Ditch at Wahiawa, Oahu, HI", "USGS Gage ID": "16210100", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 786.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.50055556, "dec_long_va": -158.0510278, "huc_cd": 20060000, "site_tp_cd": "ST-DCH"}, "type": "Feature"}, {"bbox": [-158.120361, 21.565305560000002, -158.120361, 21.565305560000002], "geometry": {"coordinates": [-158.120361, 21.565305560000002], "type": "Point"}, "id": "16", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 1993.86, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Kaukonahua Str at Waialua, Oahu, HI", "USGS Gage ID": "16210500", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 5.0, "alt_datum_cd": "LMSL", "alt_va": 15.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.56530556, "dec_long_va": -158.120361, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.1801667, 21.501583330000035, -158.1801667, 21.501583330000035], "geometry": {"coordinates": [-158.1801667, 21.501583330000035], "type": "Point"}, "id": "17", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 74.1, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Makaha Str nr Makaha, Oahu, HI", "USGS Gage ID": "16211600", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 938.64, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.50158333, "dec_long_va": -158.1801667, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.0447778, 21.37813888999996, -158.0447778, 21.37813888999996], "geometry": {"coordinates": [-158.0447778, 21.37813888999996], "type": "Point"}, "id": "18", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 51.6, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Honouliuli Str at H-1 Freeway nr Waipahu, Oahu, HI", "USGS Gage ID": "16212490", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 5.0, "alt_datum_cd": "LMSL", "alt_va": 145.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.37813889, "dec_long_va": -158.0447778, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.0444722, 21.47230556000001, -158.0444722, 21.47230556000001], "geometry": {"coordinates": [-158.0444722, 21.47230556000001], "type": "Point"}, "id": "19", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 69.56, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waikele Str at Wheeler Field, Oahu, HI", "USGS Gage ID": "16212601", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 5.0, "alt_datum_cd": "LMSL", "alt_va": 710.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.47230556, "dec_long_va": -158.0444722, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.9033333, 21.382000000000037, -157.9033333, 21.382000000000037], "geometry": {"coordinates": [-157.9033333, 21.382000000000037], "type": "Point"}, "id": "20", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 137.43, "Estimated Percentile": 98.01, "Streamflow Category": "Much above normal", "Streamgage Name": "N. Halawa Str nr Honolulu, Oahu, HI", "USGS Gage ID": "16226200", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 160.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.382, "dec_long_va": -157.9033333, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.9127222, 21.371888890000005, -157.9127222, 21.371888890000005], "geometry": {"coordinates": [-157.9127222, 21.371888890000005], "type": "Point"}, "id": "21", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 84.33, "Estimated Percentile": 92.75, "Streamflow Category": "Much above normal", "Streamgage Name": "N. Halawa Str nr Quar. Stn. at Halawa, Oahu, HI", "USGS Gage ID": "16226400", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 60.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.37188889, "dec_long_va": -157.9127222, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.84861099999998, 21.388055560000055, -157.84861099999998, 21.388055560000055], "geometry": {"coordinates": [-157.84861099999998, 21.388055560000055], "type": "Point"}, "id": "22", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 27.91, "Estimated Percentile": 93.84, "Streamflow Category": "Much above normal", "Streamgage Name": "Moanalua Stream nr Kaneohe, Oahu, HI", "USGS Gage ID": "16227500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 690.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.38805556, "dec_long_va": -157.848611, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.84444439999996, 21.363361099999988, -157.84444439999996, 21.363361099999988], "geometry": {"coordinates": [-157.84444439999996, 21.363361099999988], "type": "Point"}, "id": "23", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 72.66, "Estimated Percentile": 95.98, "Streamflow Category": "Much above normal", "Streamgage Name": "Kalihi Str nr Honolulu, Oahu, HI", "USGS Gage ID": "16229000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.1, "alt_datum_cd": "LMSL", "alt_va": 464.4, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.3633611, "dec_long_va": -157.8444444, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.83674999999997, 21.296638890000008, -157.83674999999997, 21.296638890000008], "geometry": {"coordinates": [-157.83674999999997, 21.296638890000008], "type": "Point"}, "id": "24", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 48.33, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Makiki Stream at King St. bridge, Oahu, HI", "USGS Gage ID": "16238000", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 2.0, "alt_datum_cd": "LMSL", "alt_va": 10.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.29663889, "dec_long_va": -157.83675, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.80086099999997, 21.32836110000001, -157.80086099999997, 21.32836110000001], "geometry": {"coordinates": [-157.80086099999997, 21.32836110000001], "type": "Point"}, "id": "25", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 26.24, "Estimated Percentile": 95.32, "Streamflow Category": "Much above normal", "Streamgage Name": "Waihi Stream at Honolulu, Oahu, HI", "USGS Gage ID": "16238500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 290.77, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.3283611, "dec_long_va": -157.800861, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.799611, 21.328222219999986, -157.799611, 21.328222219999986], "geometry": {"coordinates": [-157.799611, 21.328222219999986], "type": "Point"}, "id": "26", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 19.41, "Estimated Percentile": 95.23, "Streamflow Category": "Much above normal", "Streamgage Name": "Waiakeakua Str at Honolulu, Oahu, HI", "USGS Gage ID": "16240500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 294.5, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.32822222, "dec_long_va": -157.799611, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8095, 21.308444440000006, -157.8095, 21.308444440000006], "geometry": {"coordinates": [-157.8095, 21.308444440000006], "type": "Point"}, "id": "27", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 84.36, "Estimated Percentile": 88.22, "Streamflow Category": "Above normal", "Streamgage Name": "Manoa Stream at Woodlawn Drive, Oahu, HI", "USGS Gage ID": "16241600", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 130.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.30844444, "dec_long_va": -157.8095, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.7883333, 21.30666667, -157.7883333, 21.30666667], "geometry": {"coordinates": [-157.7883333, 21.30666667], "type": "Point"}, "id": "28", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 20.47, "Estimated Percentile": 96.05, "Streamflow Category": "Much above normal", "Streamgage Name": "Pukele Stream near Honolulu, Oahu, HI", "USGS Gage ID": "16244000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 344.78, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.30666667, "dec_long_va": -157.7883333, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8185556, 21.28652778, -157.8185556, 21.28652778], "geometry": {"coordinates": [-157.8185556, 21.28652778], "type": "Point"}, "id": "29", "properties": {"00060_Mean_cd": "P, e", "Date": "2026-03-18", "Discharge (cfs)": 209.97, "Estimated Percentile": 93.77, "Streamflow Category": "Much above normal", "Streamgage Name": "Manoa-Palolo Drainage Canal at Moiliili, Oahu, HI", "USGS Gage ID": "16247100", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 5.0, "alt_datum_cd": "LMSL", "alt_va": 5.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.28652778, "dec_long_va": -157.8185556, "huc_cd": 20060000, "site_tp_cd": "ST-CA"}, "type": "Feature"}, {"bbox": [-157.72891669999998, 21.349972219999955, -157.72891669999998, 21.349972219999955], "geometry": {"coordinates": [-157.72891669999998, 21.349972219999955], "type": "Point"}, "id": "30", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 98.55, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waimanalo Str at Waimanalo, Oahu, HI", "USGS Gage ID": "16249000", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 20.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.34997222, "dec_long_va": -157.7289167, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.7621667, 21.359499999999986, -157.7621667, 21.359499999999986], "geometry": {"coordinates": [-157.7621667, 21.359499999999986], "type": "Point"}, "id": "31", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 104.89, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Makawao Str nr Kailua, Oahu, HI", "USGS Gage ID": "16254000", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 100.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.3595, "dec_long_va": -157.7621667, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.7905, 21.405750000000012, -157.7905, 21.405750000000012], "geometry": {"coordinates": [-157.7905, 21.405750000000012], "type": "Point"}, "id": "32", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 80.41, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Kawa Str at Kaneohe, Oahu, HI", "USGS Gage ID": "16265000", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 50.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.40575, "dec_long_va": -157.7905, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.798111, 21.41180556000001, -157.798111, 21.41180556000001], "geometry": {"coordinates": [-157.798111, 21.41180556000001], "type": "Point"}, "id": "33", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 188.19, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Kaneohe Str blw Kamehameha Hwy, Oahu, HI", "USGS Gage ID": "16274100", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 34.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.41180556, "dec_long_va": -157.798111, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8232306, 21.409208330000013, -157.8232306, 21.409208330000013], "geometry": {"coordinates": [-157.8232306, 21.409208330000013], "type": "Point"}, "id": "34", "properties": {"00060_Mean_cd": "P, e", "Date": "2026-03-18", "Discharge (cfs)": 19.32, "Estimated Percentile": 99.1, "Streamflow Category": "Much above normal", "Streamgage Name": "Heeia Stream at Haiku Valley nr Kaneohe, Oahu, HI", "USGS Gage ID": "16275000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 0.1, "alt_datum_cd": "LMSL", "alt_va": 271.9, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.40920833, "dec_long_va": -157.8232306, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8163889, 21.41741667, -157.8163889, 21.41741667], "geometry": {"coordinates": [-157.8163889, 21.41741667], "type": "Point"}, "id": "35", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 40.03, "Estimated Percentile": null, "Streamflow Category": "Not Ranked", "Streamgage Name": "Heeia Stream at Haiku Plantations Dr., Oahu, HI", "USGS Gage ID": "16279200", "__folium_color": "#d3d3d3", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 130.0, "coord_acy_cd": "H", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.41741667, "dec_long_va": -157.8163889, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.843861, 21.438722220000002, -157.843861, 21.438722220000002], "geometry": {"coordinates": [-157.843861, 21.438722220000002], "type": "Point"}, "id": "36", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 22.7, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Kahaluu Str nr Ahuimanu, Oahu, HI", "USGS Gage ID": "16283200", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 150.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.43872222, "dec_long_va": -157.843861, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.85661099999996, 21.448166670000006, -157.85661099999996, 21.448166670000006], "geometry": {"coordinates": [-157.85661099999996, 21.448166670000006], "type": "Point"}, "id": "37", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 29.12, "Estimated Percentile": 95.56, "Streamflow Category": "Much above normal", "Streamgage Name": "Waihee Str nr Kahaluu, Oahu, HI", "USGS Gage ID": "16284200", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 170.0, "coord_acy_cd": "R", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.44816667, "dec_long_va": -157.856611, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8629722, 21.497083329999988, -157.8629722, 21.497083329999988], "geometry": {"coordinates": [-157.8629722, 21.497083329999988], "type": "Point"}, "id": "38", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 75.9, "Estimated Percentile": 96.96, "Streamflow Category": "Much above normal", "Streamgage Name": "Waikane Str at alt 75 ft at Waikane, Oahu, HI", "USGS Gage ID": "16294900", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 75.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.49708333, "dec_long_va": -157.8629722, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8825556, 21.54061110000003, -157.8825556, 21.54061110000003], "geometry": {"coordinates": [-157.8825556, 21.54061110000003], "type": "Point"}, "id": "39", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 200.07, "Estimated Percentile": 95.08, "Streamflow Category": "Much above normal", "Streamgage Name": "Kahana Str at alt 30 ft nr Kahana, Oahu, HI", "USGS Gage ID": "16296500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 30.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.5406111, "dec_long_va": -157.8825556, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.8988889, 21.556388889999994, -157.8988889, 21.556388889999994], "geometry": {"coordinates": [-157.8988889, 21.556388889999994], "type": "Point"}, "id": "40", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 73.89, "Estimated Percentile": 91.2, "Streamflow Category": "Much above normal", "Streamgage Name": "Punaluu Str abv Punaluu Ditch Intake, Oahu, HI", "USGS Gage ID": "16301050", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 212.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.55638889, "dec_long_va": -157.8988889, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.9080556, 21.586111099999997, -157.9080556, 21.586111099999997], "geometry": {"coordinates": [-157.9080556, 21.586111099999997], "type": "Point"}, "id": "41", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 37.88, "Estimated Percentile": 91.79, "Streamflow Category": "Much above normal", "Streamgage Name": "Kaluanui Stream nr Punaluu, Oahu, HI", "USGS Gage ID": "16304200", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 110.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.5861111, "dec_long_va": -157.9080556, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.01499999999996, 21.620555559999982, -158.01499999999996, 21.620555559999982], "geometry": {"coordinates": [-158.01499999999996, 21.620555559999982], "type": "Point"}, "id": "42", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 49.07, "Estimated Percentile": 87.28, "Streamflow Category": "Above normal", "Streamgage Name": "Kamananui Str at Pupukea Mil Rd, Oahu, HI", "USGS Gage ID": "16325000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 590.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.62055556, "dec_long_va": -158.015, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.0545833, 21.63547222000001, -158.0545833, 21.63547222000001], "geometry": {"coordinates": [-158.0545833, 21.63547222000001], "type": "Point"}, "id": "43", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 308.79, "Estimated Percentile": 95.63, "Streamflow Category": "Much above normal", "Streamgage Name": "Kamananui Str at Maunawai, Oahu, HI", "USGS Gage ID": "16330000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 20.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.63547222, "dec_long_va": -158.0545833, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-158.00024999999997, 21.562333329999994, -158.00024999999997, 21.562333329999994], "geometry": {"coordinates": [-158.00024999999997, 21.562333329999994], "type": "Point"}, "id": "44", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 106.7, "Estimated Percentile": 90.98, "Streamflow Category": "Much above normal", "Streamgage Name": "Opaeula Str nr Wahiawa, Oahu, HI", "USGS Gage ID": "16345000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1120.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.56233333, "dec_long_va": -158.00025, "huc_cd": 20060000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.7619722, 21.155500000000007, -156.7619722, 21.155500000000007], "geometry": {"coordinates": [-156.7619722, 21.155500000000007], "type": "Point"}, "id": "45", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 243.06, "Estimated Percentile": 96.38, "Streamflow Category": "Much above normal", "Streamgage Name": "Halawa Stream near Halawa, Molokai, HI", "USGS Gage ID": "16400000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 25.0, "alt_datum_cd": "LMSL", "alt_va": 210.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.1555, "dec_long_va": -156.7619722, "huc_cd": 20050000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.92888889999998, 21.159324999999995, -156.92888889999998, 21.159324999999995], "geometry": {"coordinates": [-156.92888889999998, 21.159324999999995], "type": "Point"}, "id": "46", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 105.46, "Estimated Percentile": 98.71, "Streamflow Category": "Much above normal", "Streamgage Name": "Waikolu Str blw pipe nr Kalaupapa, Molokai, HI", "USGS Gage ID": "16408000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 250.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.159325, "dec_long_va": -156.9288889, "huc_cd": 20050000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-157.017861, 21.096527779999967, -157.017861, 21.096527779999967], "geometry": {"coordinates": [-157.017861, 21.096527779999967], "type": "Point"}, "id": "47", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 0.0, "Estimated Percentile": 75.0, "Streamflow Category": "Normal", "Streamgage Name": "Kaunakakai Gulch at altitude 75 feet, Molokai, HI", "USGS Gage ID": "16414200", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 25.0, "alt_datum_cd": "LMSL", "alt_va": 75.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.09652778, "dec_long_va": -157.017861, "huc_cd": 20050000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.9483333, 21.06997222000003, -156.9483333, 21.06997222000003], "geometry": {"coordinates": [-156.9483333, 21.06997222000003], "type": "Point"}, "id": "48", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 122.04, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Kawela Gulch near Moku, Molokai, HI", "USGS Gage ID": "16415600", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 25.0, "alt_datum_cd": "LMSL", "alt_va": 40.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 21.06997222, "dec_long_va": -156.9483333, "huc_cd": 20050000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.0522222, 20.66836109999998, -156.0522222, 20.66836109999998], "geometry": {"coordinates": [-156.0522222, 20.66836109999998], "type": "Point"}, "id": "49", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 777.71, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Oheo Gulch at dam near Kipahulu, Maui, HI", "USGS Gage ID": "16501200", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 420.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.6683611, "dec_long_va": -156.0522222, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.1142222, 20.80686110000001, -156.1142222, 20.80686110000001], "geometry": {"coordinates": [-156.1142222, 20.80686110000001], "type": "Point"}, "id": "50", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 241.95, "Estimated Percentile": 95.51, "Streamflow Category": "Much above normal", "Streamgage Name": "Hanawi Stream near Nahiku, Maui, HI", "USGS Gage ID": "16508000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 1.0, "alt_datum_cd": "LMSL", "alt_va": 1318.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.8068611, "dec_long_va": -156.1142222, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.1429722, 20.81436109999999, -156.1429722, 20.81436109999999], "geometry": {"coordinates": [-156.1429722, 20.81436109999999], "type": "Point"}, "id": "51", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 189.92, "Estimated Percentile": 93.12, "Streamflow Category": "Much above normal", "Streamgage Name": "West Wailuaiki Stream near Keanae, Maui, HI", "USGS Gage ID": "16518000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1550.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.8143611, "dec_long_va": -156.1429722, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.1872889, 20.831325000000025, -156.1872889, 20.831325000000025], "geometry": {"coordinates": [-156.1872889, 20.831325000000025], "type": "Point"}, "id": "52", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 81.01, "Estimated Percentile": 87.6, "Streamflow Category": "Above normal", "Streamgage Name": "Honomanu Stream near Keanae, Maui, HI", "USGS Gage ID": "16527000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1840.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.831325, "dec_long_va": -156.1872889, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.1885556, 20.848083330000033, -156.1885556, 20.848083330000033], "geometry": {"coordinates": [-156.1885556, 20.848083330000033], "type": "Point"}, "id": "53", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 24.78, "Estimated Percentile": 79.77, "Streamflow Category": "Above normal", "Streamgage Name": "Haipuaena Stream abv Spreckels Ditch, Maui, HI", "USGS Gage ID": "16536000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 0.01, "alt_datum_cd": "LMSL", "alt_va": 1512.22, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.84808333, "dec_long_va": -156.1885556, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.2312222, 20.80538889, -156.2312222, 20.80538889], "geometry": {"coordinates": [-156.2312222, 20.80538889], "type": "Point"}, "id": "54", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 62.9, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waikamoi Str abv Kula PL intake nr Olinda, Maui,HI", "USGS Gage ID": "16552800", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 1.0, "alt_datum_cd": "LMSL", "alt_va": 4487.0, "coord_acy_cd": "U", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.80538889, "dec_long_va": -156.2312222, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.2155556, 20.87111110000004, -156.2155556, 20.87111110000004], "geometry": {"coordinates": [-156.2155556, 20.87111110000004], "type": "Point"}, "id": "55", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 67.47, "Estimated Percentile": 76.93, "Streamflow Category": "Above normal", "Streamgage Name": "Nailiilihaele Stream near Huelo, Maui, HI", "USGS Gage ID": "16570000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1225.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.8711111, "dec_long_va": -156.2155556, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.2525556, 20.885638889999974, -156.2525556, 20.885638889999974], "geometry": {"coordinates": [-156.2525556, 20.885638889999974], "type": "Point"}, "id": "56", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 13.48, "Estimated Percentile": 87.39, "Streamflow Category": "Above normal", "Streamgage Name": "Honopou Stream near Huelo, Maui, HI", "USGS Gage ID": "16587000", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 1.0, "alt_datum_cd": "LMSL", "alt_va": 1208.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.88563889, "dec_long_va": -156.2525556, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.5392778, 20.88238889, -156.5392778, 20.88238889], "geometry": {"coordinates": [-156.5392778, 20.88238889], "type": "Point"}, "id": "57", "properties": {"00060_Mean_cd": "P, e", "Date": "2026-03-18", "Discharge (cfs)": 206.68, "Estimated Percentile": 92.56, "Streamflow Category": "Much above normal", "Streamgage Name": "Wailuku River at Kepaniwai Park, Maui, HI", "USGS Gage ID": "16604500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 780.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.88238889, "dec_long_va": -156.5392778, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.5338333, 20.882972220000006, -156.5338333, 20.882972220000006], "geometry": {"coordinates": [-156.5338333, 20.882972220000006], "type": "Point"}, "id": "58", "properties": {"00060_Mean_cd": "P, e", "Date": "2026-03-18", "Discharge (cfs)": 2474.14, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Wailuku River at Iao Valley Road, Maui, HI", "USGS Gage ID": "16605500", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 663.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.88297222, "dec_long_va": -156.5338333, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.5468333, 20.935861099999986, -156.5468333, 20.935861099999986], "geometry": {"coordinates": [-156.5468333, 20.935861099999986], "type": "Point"}, "id": "59", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 304.73, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waihee Rv abv Waihee Dtch intk nr Waihee, Maui, HI", "USGS Gage ID": "16614000", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 605.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.9358611, "dec_long_va": -156.5468333, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.5545, 20.97869444000005, -156.5545, 20.97869444000005], "geometry": {"coordinates": [-156.5545, 20.97869444000005], "type": "Point"}, "id": "60", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 137.23, "Estimated Percentile": 97.21, "Streamflow Category": "Much above normal", "Streamgage Name": "Kahakuloa Stream near Honokohau, Maui, HI", "USGS Gage ID": "16618000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 330.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.97869444, "dec_long_va": -156.5545, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.5870556, 20.959694439999993, -156.5870556, 20.959694439999993], "geometry": {"coordinates": [-156.5870556, 20.959694439999993], "type": "Point"}, "id": "61", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 154.86, "Estimated Percentile": 93.04, "Streamflow Category": "Much above normal", "Streamgage Name": "Honokohau Stream near Honokohau, Maui, HI", "USGS Gage ID": "16620000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 940.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.95969444, "dec_long_va": -156.5870556, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-156.6770833, 20.88313889000001, -156.6770833, 20.88313889000001], "geometry": {"coordinates": [-156.6770833, 20.88313889000001], "type": "Point"}, "id": "62", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 83.99, "Estimated Percentile": 96.53, "Streamflow Category": "Much above normal", "Streamgage Name": "Kahoma Stream at Lahaina, Maui, HI", "USGS Gage ID": "16638500", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 50.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.88313889, "dec_long_va": -156.6770833, "huc_cd": 20020000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.2661139, 19.71768610000002, -155.2661139, 19.71768610000002], "geometry": {"coordinates": [-155.2661139, 19.71768610000002], "type": "Point"}, "id": "63", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 5.64, "Estimated Percentile": 42.64, "Streamflow Category": "Normal", "Streamgage Name": "Wailuku River nr Kaumana, HI", "USGS Gage ID": "16701800", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 3520.0, "coord_acy_cd": "U", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.7176861, "dec_long_va": -155.2661139, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.15075, 19.71213889, -155.15075, 19.71213889], "geometry": {"coordinates": [-155.15075, 19.71213889], "type": "Point"}, "id": "64", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 245.4, "Estimated Percentile": 74.15, "Streamflow Category": "Normal", "Streamgage Name": "Wailuku River at Piihonua, HI", "USGS Gage ID": "16704000", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 1090.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.71213889, "dec_long_va": -155.15075, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.15183330000002, 19.764333329999985, -155.15183330000002, 19.764333329999985], "geometry": {"coordinates": [-155.15183330000002, 19.764333329999985], "type": "Point"}, "id": "65", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 146.43, "Estimated Percentile": 74.68, "Streamflow Category": "Normal", "Streamgage Name": "Honolii Stream nr Papaikou, HI", "USGS Gage ID": "16717000", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 1540.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.76433333, "dec_long_va": -155.1518333, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.2431444, 19.972122219999985, -155.2431444, 19.972122219999985], "geometry": {"coordinates": [-155.2431444, 19.972122219999985], "type": "Point"}, "id": "66", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 2.24, "Estimated Percentile": 52.62, "Streamflow Category": "Normal", "Streamgage Name": "Manowaiopae Stream near Spencer Road, HI", "USGS Gage ID": "16717815", "__folium_color": "#44f24e", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 970.0, "coord_acy_cd": "H", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.97212222, "dec_long_va": -155.2431444, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.6811667, 20.085333330000008, -155.6811667, 20.085333330000008], "geometry": {"coordinates": [-155.6811667, 20.085333330000008], "type": "Point"}, "id": "67", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 95.89, "Estimated Percentile": 97.65, "Streamflow Category": "Much above normal", "Streamgage Name": "Kawainui Stream nr Kamuela, HI", "USGS Gage ID": "16720000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 4060.0, "coord_acy_cd": "S", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.08533333, "dec_long_va": -155.6811667, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.67075, 20.071083329999936, -155.67075, 20.071083329999936], "geometry": {"coordinates": [-155.67075, 20.071083329999936], "type": "Point"}, "id": "68", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 42.67, "Estimated Percentile": 96.34, "Streamflow Category": "Much above normal", "Streamgage Name": "Alakahi Stream near Kamuela, HI", "USGS Gage ID": "16725000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 3900.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.07108333, "dec_long_va": -155.67075, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.6816944, 20.045611099999984, -155.6816944, 20.045611099999984], "geometry": {"coordinates": [-155.6816944, 20.045611099999984], "type": "Point"}, "id": "69", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 107.95, "Estimated Percentile": 85.22, "Streamflow Category": "Above normal", "Streamgage Name": "Kohakohau Stream above intake, nr Kamuela, HI", "USGS Gage ID": "16756100", "__folium_color": "#5fd7d9", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 3470.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.0456111, "dec_long_va": -155.6816944, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.66397699, 20.043634499999992, -155.66397699, 20.043634499999992], "geometry": {"coordinates": [-155.66397699, 20.043634499999992], "type": "Point"}, "id": "70", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 61.36, "Estimated Percentile": 95.47, "Streamflow Category": "Much above normal", "Streamgage Name": "Waikoloa Str at Marine Dam nr Kamuela, HI", "USGS Gage ID": "16758000", "__folium_color": "#2641f1", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 3460.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 20.0436345, "dec_long_va": -155.66397699, "huc_cd": 200100001407, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.9496944, 19.634194440000016, -155.9496944, 19.634194440000016], "geometry": {"coordinates": [-155.9496944, 19.634194440000016], "type": "Point"}, "id": "71", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 100.93, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Waiaha Stream at Holualoa, HI", "USGS Gage ID": "16759600", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 20.0, "alt_datum_cd": "LMSL", "alt_va": 1493.0, "coord_acy_cd": "1", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.63419444, "dec_long_va": -155.9496944, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}, {"bbox": [-155.4770833, 19.20777778, -155.4770833, 19.20777778], "geometry": {"coordinates": [-155.4770833, 19.20777778], "type": "Point"}, "id": "72", "properties": {"00060_Mean_cd": "P", "Date": "2026-03-18", "Discharge (cfs)": 51.34, "Estimated Percentile": 100.0, "Streamflow Category": "All-time high for this day", "Streamgage Name": "Paauau Gulch at Pahala, HI", "USGS Gage ID": "16770500", "__folium_color": "#1f296b", "agency_cd": "USGS", "alt_acy_va": 10.0, "alt_datum_cd": "LMSL", "alt_va": 972.0, "coord_acy_cd": "5", "dec_coord_datum_cd": "NAD83", "dec_lat_va": 19.20777778, "dec_long_va": -155.4770833, "huc_cd": 20010000, "site_tp_cd": "ST"}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+    geo_json_194625e7cf8b99305059f7ad823ba20a.bindTooltip(
+    function(layer){
+    let div = L.DomUtil.create('div');
+    
+    let handleObject = feature => {
+        if (feature === null) {
+            return '';
+        } else if (typeof(feature)=='object') {
+            return JSON.stringify(feature);
+        } else {
+            return feature;
+        }
+    }
+    let fields = ["USGS Gage ID", "Streamgage Name", "Streamflow Category", "Discharge (cfs)", "Estimated Percentile", "Date"];
+    let aliases = ["USGS Gage ID", "Streamgage Name", "Streamflow Category", "Discharge (cfs)", "Estimated Percentile", "Date"];
+    let table = '<table>' +
+        String(
+        fields.map(
+        (v,i)=>
+        `<tr>
+            <th>${aliases[i]}</th>
+            
+            <td>${handleObject(layer.feature.properties[v])}</td>
+        </tr>`).join(''))
+    +'</table>';
+    div.innerHTML=table;
+    
+    return div
+    }
+    ,{
+  "sticky": true,
+  "className": "foliumtooltip",
+});
+                     
+    
+            geo_json_194625e7cf8b99305059f7ad823ba20a.addTo(map_2acd5aeadce7538418189fe5645949e8);
+        
+    
+            tile_layer_e158ba880960dd68a7e3f9161f848309.addTo(map_2acd5aeadce7538418189fe5645949e8);
+        
+    
+            geo_json_194625e7cf8b99305059f7ad823ba20a.addTo(map_2acd5aeadce7538418189fe5645949e8);
+        
+</script>
+</html>
